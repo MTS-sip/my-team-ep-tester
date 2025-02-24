@@ -1,29 +1,39 @@
-const express = require('express');
-const cors = require('cors');
-const { sequelize, syncDatabase } = require('./models');
-const userRoutes = require('./routes/userRoutes');
-const eventRoutes = require('./routes/eventRoutes');
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import sequelize from "./src/models/database.js";
+import authRoutes from "./src/routes/auth.js";
+import eventRoutes from "./src/routes/events.js";
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(express.json()); // Enable JSON body parsing
-app.use(cors()); // Enable CORS
+app.use(cors());
+app.use(express.json());
 
-// Routes
-app.use('/api/users', userRoutes);
-app.use('/api/events', eventRoutes);
-
-// Sync Database and Start Server
-const startServer = async () => {
+// Database connection
+const connectDB = async () => {
   try {
-    await syncDatabase(); // Ensures models sync properly
-    console.log('Database connected and tables created!');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  } catch (err) {
-    console.error('Error syncing database:', err);
+    await sequelize.authenticate();
+    console.log("✅ Database connected successfully");
+    await sequelize.sync();
+  } catch (error) {
+    console.error("❌ Database connection failed:", error);
   }
 };
+connectDB();
 
-startServer();
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/events", eventRoutes);
+
+// Root endpoint
+app.get("/", (req, res) => {
+  res.send("🎉 Welcome to the Event Planner API!");
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+});

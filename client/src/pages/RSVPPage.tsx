@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import type { RSVP } from "../interfaces/RSVP";
+import type { RSVP } from "../interfaces/rsvp.tsx";
 
 
 const RSVP = () => {

@@ -1,6 +1,6 @@
-import type { UserRegister } from '../interfaces/UserRegister';
+import type { userRegister } from '../interfaces/userRegister.ts';
 
-const signUp = async (userInfo: UserRegister) => {
+const signUp = async (userInfo: userRegister) => {
   try {
     const response = await fetch('/auth/register', { // <-- Updated endpoint to register users
       method: 'POST',

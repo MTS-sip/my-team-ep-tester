@@ -9,7 +9,6 @@ import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
 import Register from './pages/Register.tsx';
 import Create from './pages/Create.tsx';
-import View from './pages/View.tsx';
 import RSVP from './pages/RSVPPage.tsx';
 
 const router = createBrowserRouter([
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: '/create-event',
         element: <Create />,
-      },
-      {
-        path: '/view-event',
-        element: <View />,
       },
       {
         path: "/rsvp/:token", // Add RSVP route here
