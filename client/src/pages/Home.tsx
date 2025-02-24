@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { fetchEvents, updateEvent, deleteEvent } from "../api/eventsAPI"; // Import API functions
 
 const Home = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<{ id: string; name: string; description: string; date: string; location: string }[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editingEvent, setEditingEvent] = useState(null);
+  const [editingEvent, setEditingEvent] = useState<{ id: string | number; name: string; description: string; date: string; location: string } | null>(null);
 
   useEffect(() => {
     const loadEvents = async () => {
@@ -26,7 +26,9 @@ const Home = () => {
   };
 
   const handleChange = (e) => {
-    setEditingEvent({ ...editingEvent, [e.target.name]: e.target.value });
+    if (editingEvent) {
+      setEditingEvent({ ...editingEvent, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSave = async () => {
@@ -39,7 +41,7 @@ const Home = () => {
     }
   };
 
-  const handleDelete = async (id: string | number) => {
+  const handleDelete = async (id: string) => {
     try {
       await deleteEvent(id);
       setEvents(events.filter(event => event.id !== id));

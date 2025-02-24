@@ -4,6 +4,8 @@ import { createEvent } from "../api/eventsAPI.ts"; // Import the API function
 
 const Create = () => {
   const [event, setEvent] = useState({
+    id: "",
+    title: "",
     name: "",
     description: "",
     date: "",
