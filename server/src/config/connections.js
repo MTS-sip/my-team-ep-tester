@@ -1,22 +1,7 @@
 import { Sequelize } from "sequelize";
 
-// Load environment variables
-const isProduction = process.env.NODE_ENV === "production";
-
-const sequelize = isProduction
-  ? process.env.DATABASE_URL
-    ? new Sequelize(process.env.DATABASE_URL, {
-        dialect: "postgres",
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false, // Required for Render's PostgreSQL
-          },
-        },
-      })
-    : (() => {
-        throw new Error("DATABASE_URL is not defined");
-      })()
+const sequelize = process.env.DB_URL
+  ? new Sequelize(process.env.DB_URL)
   : new Sequelize(
       process.env.DB_NAME || "default_db_name",
       process.env.DB_USER || "default_db_user",
