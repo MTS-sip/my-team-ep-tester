@@ -5,7 +5,7 @@ import { authenticateToken } from "../middleware/authMiddleware.js"; // Middlewa
 const router = express.Router();
 
 // Get all events (public)
-router.get("/public", async (req, res) => {
+router.get("/public", async (_req, res) => {
   try {
     const events = await Event.findAll();
     res.json(events);
