@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+      /* Output */
+    "outDir": "./dist" /* Redirect output structure to the "dist" folder */,
+    "rootDir": "./src" /* Specify the root folder containing the source files */,
+    "declaration": true, /* Generate .d.ts files for TypeScript definitions */
+    "sourceMap": true /* Generate source maps for debugging */,
+
     /* Language and Environment */
     "target": "ES2020" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 
