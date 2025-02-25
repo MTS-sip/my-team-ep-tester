@@ -15,6 +15,7 @@ const Home = () => {
         console.error(error);
       } finally {
         setLoading(false);
+        }
       }
     };
 
@@ -25,18 +26,21 @@ const Home = () => {
     setEditingEvent(event);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (editingEvent) {
       setEditingEvent({ ...editingEvent, [e.target.name]: e.target.value });
     }
   };
 
   const handleSave = async () => {
-    try {
-      const updatedEvent = await updateEvent(editingEvent.id, editingEvent);
-      setEvents(events.map(event => (event.id === updatedEvent.id ? updatedEvent : event)));
-      setEditingEvent(null);
-    } catch (error) {
+    if (editingEvent) {
+      try {
+        const updatedEvent = await updateEvent(editingEvent.id, editingEvent);
+        if (updatedEvent !== undefined) {
+          setEvents(events.map((event: { id: string; name: string; description: string; date: string; location: string }) => (event.id === updatedEvent.id ? updatedEvent : event)));
+          setEditingEvent(null);
+        }
+      } catch (error) {
       console.error(error);
     }
   };

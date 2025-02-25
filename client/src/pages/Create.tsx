@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createEvent } from "../api/eventsAPI.tsx"; // Import the API function
+import { createEvent } from "../api/eventsAPI"; // Import the API function
 
 const Create = () => {
   const [event, setEvent] = useState({
