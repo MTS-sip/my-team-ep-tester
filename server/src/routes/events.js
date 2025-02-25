@@ -1,6 +1,6 @@
 import express from "express";
-import { Event } from "../models/Event.js";
-import { authenticateToken } from "../middleware/authMiddleware.js";
+import Event from "../models/Event.js"; // correction to import
+import { authenticateToken } from "../middleware/authMiddleware.js"; // Middleware
 
 const router = express.Router();
 

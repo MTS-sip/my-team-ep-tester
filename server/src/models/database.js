@@ -1,16 +1,19 @@
-// Establish a connection to the PostgreSQL database using Sequelize
 import { Sequelize } from "sequelize";
-import configData from "../config/config.js";
+import dotenv from "dotenv";
 
-const config = configData[process.env.NODE_ENV || "development"];
-const sequelize = new Sequelize(
-  "event_planner_db",
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: config.dialect,
-  }
-);
+// Load environment variables
+dotenv.config();
+
+// Validate required environment variables
+if (!process.env.DB_NAME || !process.env.DB_USER || !process.env.DB_PASSWORD || !process.env.DB_HOST) {
+  throw new Error("❌ Missing required database environment variables in .env file.");
+}
+
+// Initialize Sequelize instance
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: "postgres",
+  logging: false, // Disable logging (optional)
+});
 
 export default sequelize;
