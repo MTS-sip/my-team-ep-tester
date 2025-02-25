@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ["jwt-decode"], // ✅ Ensure Vite doesn't tree-shake jwt-decode
+      external: ["jwt-decode"],
     },
   },
 });
