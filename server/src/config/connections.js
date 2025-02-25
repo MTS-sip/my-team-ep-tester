@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+import { Sequelize } from "sequelize";
 
 // Load environment variables
 const isProduction = process.env.NODE_ENV === "production";
@@ -27,7 +27,8 @@ const sequelize = isProduction
       }
     );
 
-module.exports = sequelize;
+//  ES module export
+export default sequelize;
 
 /* 
 const { Sequelize } = require("sequelize");
