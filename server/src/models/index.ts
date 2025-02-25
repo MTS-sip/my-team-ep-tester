@@ -1,11 +1,10 @@
-import sequelize from "../models/database.js"; //Import Path
-import { UserFactory } from "./user.js";
+import sequelize from '../models/database.js'; // Import Sequelize Instance
+import { UserFactory } from './user.js';
 
 // Initialize User Model with Sequelize Instance
 const User = UserFactory(sequelize);
 
 export { sequelize, User };
-
 
 
 
