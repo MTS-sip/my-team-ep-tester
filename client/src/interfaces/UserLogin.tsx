@@ -1,7 +1,4 @@
-export interface UserLogin { 
-  id: number;
-  name: string | null;
-  email: string | null;
+export interface UserLogin { // Define the UserLogin interface
   username: string;
   password: string;
 }
