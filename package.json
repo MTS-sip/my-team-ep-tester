@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "concurrently \"npm run server:dev\" \"wait-on http://localhost:3000 && npm run client:dev\"",
-   "build": "cd client && npm install && npm run build",
+   "build": "cd client && npm run build",
    
     "start": "npm run server && npm install && npm run client",
     "install": "cd server && npm install && cd ../client && npm install",
