@@ -35,6 +35,8 @@ const Register = () => {
         name: registerData.name,
         username: registerData.username,
         password: registerData.password,
+        email: registerData.username,
+        confirmPassword: registerData.confirmPassword,
       });
 
     } catch (err) {

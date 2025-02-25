@@ -1,22 +1,21 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 
 import Auth from '../utils/auth';
-import { login } from '../api/API';
-import type { userLogin } from '../interfaces/userLogin';
+import { login } from '../api/authAPI';
+import type { UserLogin } from '../interfaces/userLogin';
 
-const [loginData, setLoginData] = useState<userLogin>({
-  username: "",
-  password: "",
-});
+const Login = () => {
+  const [loginData, setLoginData] = useState<UserLogin>({
+    username: "",
+    password: "",
+  });
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
+    setLoginData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -39,7 +38,7 @@ const [loginData, setLoginData] = useState<userLogin>({
             className='form-input'
             type='text'
             name='username'
-            value={loginData.username || ''}
+            value={loginData.username}
             onChange={handleChange}
             placeholder='you@youremailadress.com'
           />
@@ -50,7 +49,7 @@ const [loginData, setLoginData] = useState<userLogin>({
             className='form-input'
             type='password'
             name='password'
-            value={loginData.password || ''}
+            value={loginData.password}
             onChange={handleChange}
             placeholder='password'
           />
