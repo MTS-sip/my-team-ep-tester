@@ -1,14 +1,13 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
-import { login } from '../api/authAPI';
-import type { User } from '../interfaces/User';
 
-const Login = () => {
-  const [loginData, setLoginData] = useState<User>({
-    username: '',
-    password: '',
-  });
+import Auth from '../utils/auth';
+import { login } from '../api/API';
+import type { userLogin } from '../interfaces/userLogin';
+
+const [loginData, setLoginData] = useState<userLogin>({
+  username: "",
+  password: "",
+});
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
