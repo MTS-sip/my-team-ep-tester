@@ -28,10 +28,15 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({ message: "User registered successfully", user: newUser });
+    return res
+      .status(201)
+      .json({ message: "User registered successfully", user: newUser });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    res.status(500).json({ message: "Error registering user", error: errorMessage });
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return res
+      .status(500)
+      .json({ message: "Error registering user", error: errorMessage });
   }
 });
 
@@ -63,11 +68,14 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.json({ message: "Login successful", token, user });
+    return res.json({ message: "Login successful", token, user });
   } catch (error) {
     console.error("Login Error:", error);
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    res.status(500).json({ message: "Error logging in", error: errorMessage });
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return res
+      .status(500)
+      .json({ message: "Error logging in", error: errorMessage });
   }
 });
 
