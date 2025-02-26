@@ -20,10 +20,7 @@ const __dirname = dirname(__filename);
 // Serve frontend build folder
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// Serve `index.html` for React Router (ensures correct routing)
-app.get("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
+
 
 // Middleware
 app.use(express.json());
