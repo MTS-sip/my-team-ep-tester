@@ -5,8 +5,8 @@ import express from "express";
 import sequelize from "./config/connections.js";
 import authRoutes from "./routes/auth.js";
 import eventRoutes from "./routes/events.js";
-
-
+import cors from "cors";
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 5000; 
@@ -29,6 +29,19 @@ connectDB();
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
+
+app.use(cors());
+app.use(express.json());
+
+
+// Serve frontend build folder (ensure correct path)
+app.use(express.static(path.join(__dirname, "../../client/dist")));
+
+
+// Serve index.html for unknown routes -import path
+app.get("*", (_, res) => {
+  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+});
 
 // Root endpoint
 app.get("/", (_, res) => {
