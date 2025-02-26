@@ -32,7 +32,7 @@ app.use("/api/events", eventRoutes);
 
 // Root endpoint
 app.get("/", (_, res) => {
-  res.send("🎉 Welcome to the Event Planner API!");
+  res.send("🎉 Welcome to Occasionally, your place for Event Planning, Online, Organized, for your Most Memorable and Greatest Gatherings. OMG²!");
 });
 
 app.listen(PORT, () => {
