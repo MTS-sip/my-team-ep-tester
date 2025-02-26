@@ -9,8 +9,13 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="nav-title">
-        <Link to='/create'>
+        <Link to='/create-event'>
           <h2>Create Event</h2>
+        </Link>
+      </div>
+      <div className="nav-title">
+        <Link to='/login'>
+          <h2>Login</h2>
         </Link>
       </div>
     </div>
