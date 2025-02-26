@@ -18,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Serve frontend build folder
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 
 
@@ -45,7 +45,7 @@ connectDB();
 
 // Root endpoint
 app.get("/", (_, res) => {
- res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+ res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
   //res.send("🎉 Welcome to Occasionally, your place for Event Planning, Online, Organized, for your Most Memorable and Greatest Gatherings. OMG²!");
 });
 
