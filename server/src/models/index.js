@@ -3,6 +3,7 @@ require("dotenv").config({ path: "../.env" }); // If inside the 'server' folder
 console.log(process.env.SECRET_KEY);
 
 const sequelize = require("../config/database"); // Import the Sequelize instance
+const User = require("./UserLogin");
 const User = require("./User"); // Import User model
 const Event = require("./Event"); // Import Event model
 const Rsvp = require("./Rsvp"); // Import Rsvp model
