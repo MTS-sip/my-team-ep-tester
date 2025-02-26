@@ -1,28 +1,33 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
-
 import Auth from '../utils/auth';
-import { login } from '../api/authAPI';
+import {login } from '../api/authAPI';
 import type { UserLogin } from '../interfaces/userLogin';
 
 const Login = () => {
   const [loginData, setLoginData] = useState<UserLogin>({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setLoginData((prevData) => ({
-      ...prevData,
+    setLoginData({
+      ...loginData,
       [name]: value,
-    }));
+    });
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(loginData);
-      Auth.login(data.token);
+      const data = await login(loginData); // Await login function call
+      if (data && data.token) { // Ensure token exists before using it
+        Auth.login(data.token);
+      } else {
+        throw new Error('No token received from server');
+      }
     } catch (err) {
       console.error('Failed to login', err);
     }
@@ -38,7 +43,7 @@ const Login = () => {
             className='form-input'
             type='text'
             name='username'
-            value={loginData.username}
+            value={loginData.username || ''}
             onChange={handleChange}
             placeholder='you@youremailadress.com'
           />
@@ -49,7 +54,7 @@ const Login = () => {
             className='form-input'
             type='password'
             name='password'
-            value={loginData.password}
+            value={loginData.password || ''}
             onChange={handleChange}
             placeholder='password'
           />
