@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import AuthService from '../utils/auth.ts';
 import type { Event } from '../interfaces/event.tsx';
