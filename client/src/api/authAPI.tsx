@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthService from '../utils/auth.ts';
 import type { Event } from '../interfaces/event.tsx';
-import Login from '../pages/Login.tsx';
+//import Login from '../pages/Login.tsx';
 import type { UserLogin } from '../interfaces/userLogin.tsx';
 
 
@@ -82,7 +82,7 @@ export const login = async (userInfo: UserLogin) => {
     return Promise.reject('Could not fetch user info');
   }
 };
-export default Login;
+//export default Login;
 
 /* 
 import type { UserLogin } from '../interfaces/userLogin.tsx';
