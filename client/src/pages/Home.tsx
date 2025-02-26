@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchEvents, updateEvent, deleteEvent } from "../api/eventsAPI"; // Import API functions
-
-interface Event {
-  id: string;
-  name: string;
-  description: string;
-  date: string;
-  location: string;
-}
+import { fetchEvents, updateEvent, deleteEvent } from "../api/eventsAPI";
+import type { Event } from "../interfaces/event";
 
 const Home = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -18,9 +11,9 @@ const Home = () => {
     const loadEvents = async () => {
       try {
         const data = await fetchEvents();
-        setEvents(data);
+        setEvents(data as Event[]);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching events:", error);
       } finally {
         setLoading(false);
       }
@@ -40,23 +33,25 @@ const Home = () => {
   };
 
   const handleSave = async () => {
-    if (editingEvent) {
-      try {
-        await updateEvent(editingEvent.id, editingEvent);
-        setEvents(events.map((event) => (event.id === editingEvent.id ? editingEvent : event)));
-        setEditingEvent(null);
-      } catch (error) {
-        console.error(error);
-      }
+    if (!editingEvent) return;
+
+    try {
+      const updatedEvent = (await updateEvent(editingEvent.id, editingEvent)) as unknown as Event; // ✅ Cast first to unknown, then Event
+      setEvents(prevEvents =>
+        prevEvents.map(event => (event.id === updatedEvent.id ? updatedEvent : event))
+      );
+      setEditingEvent(null);
+    } catch (error) {
+      console.error("Error updating event:", error);
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string | number) => { // ✅ Accepts both string & number
     try {
-      await deleteEvent(id);
-      setEvents(events.filter((event) => event.id !== id));
+      await deleteEvent(id.toString()); // ✅ Ensures it's passed as a string
+      setEvents(prevEvents => prevEvents.filter(event => event.id !== id.toString()));
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting event:", error);
     }
   };
 
@@ -67,14 +62,14 @@ const Home = () => {
         <p>Loading events...</p>
       ) : events.length > 0 ? (
         <div className="grid">
-          {events.map((event) => (
+          {events.map(event => (
             <div key={event.id} className="event-card">
               {editingEvent && editingEvent.id === event.id ? (
                 <div className="edit-form">
                   <input
                     type="text"
-                    name="name"
-                    value={editingEvent.name}
+                    name="title"
+                    value={editingEvent.title}
                     onChange={handleChange}
                     className="form-control"
                   />
@@ -98,30 +93,18 @@ const Home = () => {
                     onChange={handleChange}
                     className="form-control"
                   />
-                  <button onClick={handleSave} className="btn btn-success">
-                    Save
-                  </button>
-                  <button onClick={() => setEditingEvent(null)} className="btn btn-secondary">
-                    Cancel
-                  </button>
+                  <button onClick={handleSave} className="btn btn-success">Save</button>
+                  <button onClick={() => setEditingEvent(null)} className="btn btn-secondary">Cancel</button>
                 </div>
               ) : (
                 <>
-                  <h2>{event.name}</h2>
+                  <h2>{event.title}</h2>
                   <p>{event.description}</p>
-                  <p>
-                    <strong>Date:</strong> {new Date(event.date).toLocaleString()}
-                  </p>
-                  <p>
-                    <strong>Location:</strong> {event.location}
-                  </p>
+                  <p><strong>Date:</strong> {new Date(event.date).toLocaleString()}</p>
+                  <p><strong>Location:</strong> {event.location}</p>
                   <div className="event-actions">
-                    <button onClick={() => handleUpdate(event)} className="btn btn-warning">
-                      Update
-                    </button>
-                    <button onClick={() => handleDelete(event.id)} className="btn btn-danger">
-                      Delete
-                    </button>
+                    <button onClick={() => handleUpdate(event)} className="btn btn-warning">Update</button>
+                    <button onClick={() => handleDelete(event.id)} className="btn btn-danger">Delete</button>
                   </div>
                 </>
               )}
