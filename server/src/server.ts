@@ -7,8 +7,7 @@ import eventRoutes from "./routes/events.js";
 dotenv.config();
 
 const app = express();
-const isProduction = process.env.NODE_ENV === "production";
-const PORT = isProduction ? process.env.PORT : 5000; // Use 5000 for dev, Render's port for prod
+const PORT = process.env.PORT || 5000; 
 
 // Middleware
 app.use(express.json());
