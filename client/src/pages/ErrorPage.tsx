@@ -1,4 +1,4 @@
-/*
+
 const ErrorPage = () => {
   return (
     <section>
@@ -9,4 +9,3 @@ const ErrorPage = () => {
 };
 
 export default ErrorPage;
-*/
