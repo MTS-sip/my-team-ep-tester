@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
-import sequelize from "./config/connections.js";
+import { sequelize } from "./config/connections.js";
 import authRoutes from "./routes/auth.js";
 import eventRoutes from "./routes/events.js";
 import { fileURLToPath } from "url"; //  define `__dirname`

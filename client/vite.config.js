@@ -4,7 +4,12 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
+    outDir: "dist", // Ensure dist folder is created
+    emptyOutDir: true, // Clears old build files before a new build
     rollupOptions: {
+      input: {
+        main: "index.html",
+      },
       external: ["jwt-decode"],
     },
   },
