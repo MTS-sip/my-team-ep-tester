@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 // ✅ Enable CORS for frontend requests
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://your-render-frontend.onrender.com"], // ✅ Allow frontend origin
+    origin: ["http://localhost:3000", "https://my-team-ep-tester.onrender.com"], // ✅ Allow frontend origin
     credentials: true, // ✅ If sending cookies or auth headers
   })
 );
