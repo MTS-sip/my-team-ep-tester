@@ -9,7 +9,26 @@ const API_URL =
     ? "https://https://my-team-ep-tester.onrender.com/api/events"
     : "http://localhost:5000/api/events");
 
-// ✅ Fetch all events (public)
+
+    export const fetchEvents = async () => {
+      try {
+        console.log(`Fetching events from: ${API_URL}/public`); // ✅ Debugging log
+        const { data } = await axios.get(`${API_URL}/public`, { timeout: 5000 });
+    
+        // ✅ Ensure it's an array before returning
+        if (!Array.isArray(data)) {
+          console.error("⚠️ fetchEvents(): Expected an array but got:", data);
+          return [];
+        }
+        return data;
+      } catch (error) {
+        console.error("🚨 Error fetching events:", error);
+        return []; // ✅ Return empty array instead of undefined/null
+      }
+    };
+//this part modified above
+/*
+    // ✅ Fetch all events (public)
 export const fetchEvents = async () => {
   try {
     console.log(`Fetching events from: ${API_URL}/public`); // Debugging log
@@ -20,6 +39,7 @@ export const fetchEvents = async () => {
     throw error;
   }
 };
+*/
 
 // ✅ Create a new event (authenticated)
 export const createEvent = async (event: Event) => {
