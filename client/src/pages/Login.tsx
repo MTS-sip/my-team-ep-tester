@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import Auth from '../utils/auth';
-import { login } from '../api/authAPI';
+import {login } from '../api/authAPI';
 import type { UserLogin } from '../interfaces/userLogin';
 
 const Login = () => {
@@ -8,9 +8,6 @@ const Login = () => {
     username: '',
     password: '',
   });
-
-  const [loading, setLoading] = useState(false); //  loading state
-  const [error, setError] = useState<string | null>(null); // error state
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -24,22 +21,15 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true); // loading state
-    setError(null); // Reset error state
-
     try {
-      const data = await login(loginData); // Await API call
-
-      if (data && data.token) { 
-        Auth.login(data.token); // Store token
+      const data = await login(loginData); // Await login function call
+      if (data && data.token) { // Ensure token exists before using it
+        Auth.login(data.token);
       } else {
-        throw new Error('No token received from server'); // Prevent undefined errors
+        throw new Error('No token received from server');
       }
     } catch (err) {
-      console.error('🚨 Login failed:', err);
-      setError('Invalid username or password. Please try again.'); // User error message
-    } finally {
-      setLoading(false); // Hide loading state
+      console.error('Failed to login', err);
     }
   };
 
@@ -47,9 +37,6 @@ const Login = () => {
     <div className='form-container'>
       <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
-
-        {error && <p className="error-message">{error}</p>} {/* Show error if any */}
-
         <div className='form-group'>
           <label>Username</label>
           <input
@@ -58,11 +45,9 @@ const Login = () => {
             name='username'
             value={loginData.username || ''}
             onChange={handleChange}
-            placeholder='you@youremailaddress.com'
-            required
+            placeholder='you@youremailadress.com'
           />
         </div>
-
         <div className='form-group'>
           <label>Password</label>
           <input
@@ -72,13 +57,11 @@ const Login = () => {
             value={loginData.password || ''}
             onChange={handleChange}
             placeholder='password'
-            required
           />
         </div>
-
         <div className='form-group'>
-          <button className='btn btn-primary' type='submit' disabled={loading}>
-            {loading ? "Logging in..." : "Login"} {/* Show loading text */}
+          <button className='btn btn-primary' type='submit'>
+            Login
           </button>
         </div>
       </form>
@@ -87,4 +70,3 @@ const Login = () => {
 };
 
 export default Login;
-
