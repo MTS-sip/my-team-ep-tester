@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchEvents, updateEvent, deleteEvent } from "../api/eventsAPI";
 import type { Event } from "../interfaces/event";
 
+
 const Home = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
