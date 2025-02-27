@@ -44,13 +44,13 @@ app.use(express.json());
 // connectDB();
 
 // Root endpoint
-app.get("*", (_, res) => {
+app.get("*", (_, res) => {  // *asteraisk for all, rcompare slash /
  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
   //res.send("🎉 Welcome to Occasionally, your place for Event Planning, Online, Organized, for your Most Memorable and Greatest Gatherings. OMG²!");
 });
 
 
-app.listen(PORT, () => {
+app.listen(PORT, () => { // *asteraisk for all, rcompare slash /
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
 
