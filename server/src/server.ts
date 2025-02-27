@@ -1,3 +1,58 @@
+import express from "express";
+import path from "path";
+import cors from "cors";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// heres what i added
+// ✅ Enable CORS for frontend requests
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://your-render-frontend.onrender.com"], // ✅ Allow frontend origin
+    credentials: true, // ✅ If sending cookies or auth headers
+  })
+);
+// hers where i end 
+
+
+// is this still needed try build without 
+// ✅ Correctly define `__dirname`
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// ✅ Allow CORS (for frontend-backend communication)
+//i blocked out cors array beloy becaues of above cors function
+// app.use(cors());
+app.use(express.json());
+
+// ✅ Serve frontend files
+const clientBuildPath = path.join(__dirname, "../client/dist");
+app.use(express.static(clientBuildPath));
+
+// ✅ API Routes
+
+import authRoutes from "./routes/auth.js";
+import eventRoutes from "./routes/events.js";
+app.use("/api/auth", authRoutes);
+app.use("/api/events", eventRoutes);
+
+// ✅ Ensure React routes are served
+app.get("*", (_, res) => {
+  res.sendFile(path.join(clientBuildPath, "index.html"));
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+
+/*
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -53,6 +108,7 @@ app.get("*", (_, res) => {  // *asteraisk for all, rcompare slash /
 app.listen(PORT, () => { // *asteraisk for all, rcompare slash /
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
+*/
 
 
 
