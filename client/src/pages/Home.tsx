@@ -36,7 +36,7 @@ const Home = () => {
     if (!editingEvent) return;
 
     try {
-      const updatedEvent = (await updateEvent(editingEvent.id, editingEvent)) as unknown as Event; // ✅ Cast first to unknown, then Event
+      const updatedEvent = (await updateEvent(editingEvent.id, editingEvent)) as unknown as Event; // Cast first to unknown, then Event
       setEvents(prevEvents =>
         prevEvents.map(event => (event.id === updatedEvent.id ? updatedEvent : event))
       );
@@ -46,9 +46,9 @@ const Home = () => {
     }
   };
 
-  const handleDelete = async (id: string | number) => { // ✅ Accepts both string & number
+  const handleDelete = async (id: string | number) => { // Accepts both string & number
     try {
-      await deleteEvent(id.toString()); // ✅ Ensures it's passed as a string
+      await deleteEvent(id.toString()); // Ensures it's passed as a string
       setEvents(prevEvents => prevEvents.filter(event => event.id !== id.toString()));
     } catch (error) {
       console.error("Error deleting event:", error);
