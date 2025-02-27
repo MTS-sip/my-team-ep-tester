@@ -1,8 +1,3 @@
-
-
-
-/*
-
 // Defines the User model for database storage
 import { DataTypes } from 'sequelize';
 import sequelize from './database.js';
@@ -49,5 +44,3 @@ const User = sequelize.define('User', {
 });
 
 export default User;
-
-*/
