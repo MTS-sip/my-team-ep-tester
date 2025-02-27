@@ -1,5 +1,5 @@
-import { jwtDecode } from 'jwt-decode';
-import type { UserLogin } from '../interfaces/userLogin.tsx';
+// import { jwtDecode } from 'jwt-decode';
+// import type { UserLogin } from '../interfaces/userLogin.tsx';
 
 interface JwtPayload {
   exp?: number; // Define expiration time property
@@ -7,18 +7,21 @@ interface JwtPayload {
 
 class AuthService {
   getProfile() {
-    return jwtDecode<UserLogin>(this.getToken());
+  //  return jwtDecode<UserLogin>(this.getToken());
+  return null;
   }
 
   loggedIn() {
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
+  //  const token = this.getToken();
+  //  return !!token && !this.isTokenExpired(token);
+  return null;
   }
 
   isTokenExpired(token: string) {
     try {
-      const decoded: JwtPayload = jwtDecode(token);
-      return decoded?.exp && decoded.exp < Date.now() / 1000;
+      //const decoded: JwtPayload = jwtDecode(token);
+      //return decoded?.exp && decoded.exp < Date.now() / 1000;
+      return null;
     } catch (err) {
       return false;
     }
