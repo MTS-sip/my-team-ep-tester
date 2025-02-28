@@ -8,7 +8,11 @@
     "noImplicitAny": false,
     "outDir": "dist",             
     "rootDir": "src",             
-    "noEmitOnError": true        
+    "noEmitOnError": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "typeRoots": ["./src/types"]
+  
   },
   "include": ["src"]
 }
