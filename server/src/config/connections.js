@@ -1,14 +1,12 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import config from "./config.js";
+import config from "./config.js"; // Ensure this is pointing to the correct config file
 
 dotenv.config(); // Load .env variables
 
-// Determine environment (default to development)
 const env = process.env.NODE_ENV || "development";
 const dbConfig = config[env];
 
-// Create Sequelize instance with environment-specific configuration
 const sequelize = new Sequelize(
   dbConfig.database,
   dbConfig.username,
@@ -21,7 +19,7 @@ const sequelize = new Sequelize(
   }
 );
 
-export default sequelize;
+export default sequelize; // ✅ Use default export
 
 // PREVIOUSLY COMMENTED OUT CODE
 /*import { Sequelize } from "sequelize";
