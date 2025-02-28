@@ -1,5 +1,5 @@
-import { seedUsers } from "./user-seeds";
-import { seedEvents } from "./event-seeds"; // 
+import { seedUsers } from "./user-seeds.js";
+import { seedEvents } from "./event-seeds.js"; // 
 import sequelize from "../config/connections.js"; 
 
 const seedAll = async (): Promise<void> => {
