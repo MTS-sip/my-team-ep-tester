@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
-// Load environment variables
+// Load env variables
 dotenv.config();
 
 console.log(process.env);
