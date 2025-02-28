@@ -1,12 +1,14 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import config from "./config.js"; // Ensure this is pointing to the correct config file
+import config from "./config.js"; // ✅ Ensure correct path
 
-dotenv.config(); // Load .env variables
+dotenv.config(); // Load environment variables
 
+// Determine environment (default to development)
 const env = process.env.NODE_ENV || "development";
 const dbConfig = config[env];
 
+// ✅ Initialize Sequelize with the environment's database configuration
 const sequelize = new Sequelize(
   dbConfig.database,
   dbConfig.username,
@@ -15,12 +17,11 @@ const sequelize = new Sequelize(
     host: dbConfig.host,
     dialect: dbConfig.dialect,
     port: dbConfig.port,
-    logging: false, // Set to true for debugging queries
+    logging: false, // Set to `true` for debugging SQL queries
   }
 );
 
-export default sequelize; // ✅ Use default export
-
+export default sequelize;
 // PREVIOUSLY COMMENTED OUT CODE
 /*import { Sequelize } from "sequelize";
 

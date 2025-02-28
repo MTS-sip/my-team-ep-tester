@@ -1,13 +1,13 @@
-import { seedUsers } from "./user-seeds.js";
-import { seedEvents } from "./event-seeds.js";
-import sequelize from "../config/connections.js"; // Corrected import
+import { seedUsers } from "./user-seeds";
+import { seedEvents } from "./event-seeds"; // 
+import sequelize from "../config/connections.js"; 
 
 const seedAll = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
     console.log("\n✅ DATABASE CONNECTED SUCCESSFULLY ✅\n");
 
-    await sequelize.sync({ force: true }); // WARNING: Drops and recreates all tables
+    await sequelize.sync({ force: true });
     console.log("\n✅ DATABASE SYNCED ✅\n");
 
     await seedUsers();
