@@ -1,6 +1,7 @@
 # Event Planner
 
-## Description rewind to connectivity
+=======
+## Description WHAT
 
 ## Project Requirements what defaaut export
 
