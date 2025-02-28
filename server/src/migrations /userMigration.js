@@ -1,18 +1,20 @@
-// Migration script to create Users table
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
 export const up = async (queryInterface) => {
-  await queryInterface.createTable("Users", {
+  await queryInterface.createTable('Users', {
     id: {
-      type: DataTypes.UUID, //  from Sequelize.UUID
-      defaultValue: DataTypes.UUIDV4, // from Sequelize
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true, // Unique identifier for each user
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true, // Ensures email is unique
+      validate: {
+        isEmail: true // Ensures valid email format
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -31,5 +33,5 @@ export const up = async (queryInterface) => {
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
 export const down = async (queryInterface) => {
-  await queryInterface.dropTable("Users"); // Drops Users table if rollback is needed
+  await queryInterface.dropTable('Users');
 };
