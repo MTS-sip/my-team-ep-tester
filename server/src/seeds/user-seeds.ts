@@ -1,31 +1,27 @@
+import { User } from "../models/user.js"; // Ensure User model is correctly imported
 
-import { User } from '../models/index.js';
-import bcrypt from 'bcrypt';
+export const seedUsers = async (): Promise<void> => {
+  try {
+    await User.bulkCreate([
+      {
+        username: "admin",
+        email: "admin@example.com",
+        password: "password123", // Will be hashed by model hooks
+      },
+      {
+        username: "johndoe",
+        email: "john@example.com",
+        password: "password123",
+      },
+      {
+        username: "janedoe",
+        email: "jane@example.com",
+        password: "password123",
+      },
+    ]);
 
-export const seedUsers = async () => {
-  const users = [
-    { name: 'John Doe', email: 'user1@example.com', username: 'johndoe', password: 'password1' },
-    { name: 'Jane Smith', email: 'user2@example.com', username: 'janesmith', password: 'password2' },
-  ];
-
-  // Hash passwords before inserting
-  for (const user of users) {
-    user.password = await bcrypt.hash(user.password, 10);
+    console.log("✅ Users seeded successfully.");
+  } catch (error) {
+    console.error("❌ Error seeding users:", error);
   }
-
-  await User.bulkCreate(users, { individualHooks: true });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
