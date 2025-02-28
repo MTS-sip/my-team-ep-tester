@@ -1,6 +1,6 @@
 # Event Planner
 
-## Description
+## Description WHAT
 
 ## Project Requirements what defaaut export
 
