@@ -1,9 +1,8 @@
-// Migration script to create Events table
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
 export const up = async (queryInterface) => {
-  await queryInterface.createTable("Events", {
+  await queryInterface.createTable('Events', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -13,13 +12,15 @@ export const up = async (queryInterface) => {
       type: DataTypes.STRING,
       allowNull: false, // Event must have a title
     },
-    description: DataTypes.TEXT, // Optional description field
+    description: {
+      type: DataTypes.TEXT, // Optional event description
+    },
     createdBy: {
-      type: DataTypes.UUID, //added DataTypes to UUID
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Users", // Foreign key referencing Users table
-        key: "id",
+        model: 'Users', // References the Users table
+        key: 'id',
       },
     },
     createdAt: {
@@ -35,5 +36,5 @@ export const up = async (queryInterface) => {
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
 export const down = async (queryInterface) => {
-  await queryInterface.dropTable("Events"); // Drops Events table if rollback is needed
+  await queryInterface.dropTable('Events');
 };

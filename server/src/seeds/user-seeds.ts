@@ -1,4 +1,3 @@
-
 import { User } from '../models/index.js';
 import bcrypt from 'bcrypt';
 
@@ -15,17 +14,3 @@ export const seedUsers = async () => {
 
   await User.bulkCreate(users, { individualHooks: true });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-

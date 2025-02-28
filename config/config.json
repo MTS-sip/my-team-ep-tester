@@ -3,22 +3,30 @@
     "username": "postgres",
     "password": "ClubGiggly",
     "database": "event_planner_db",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres",
-    "port": "5000"
+    "port": 5432
   },
   "test": {
     "username": "postgres",
     "password": "ClubGiggly",
     "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
   },
   "production": {
     "username": "postgres",
     "password": "ClubGiggly",
     "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
