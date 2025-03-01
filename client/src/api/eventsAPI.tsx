@@ -1,22 +1,47 @@
-import axios from 'axios';
-import AuthService from '../utils/auth.ts';
-import type { Event } from '../interfaces/event.tsx';
+import axios from "axios";
+import AuthService from "../utils/auth.ts";
+import type { Event } from "../interfaces/event.tsx";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/events';
+//  Ensure correct API URL (Render for production, localhost for development)
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD
+    ? "https://https://my-team-ep-tester.onrender.com/api/events"
+    : "http://localhost:5000/api/events");
 
 
-// Fetch all events
+    export const fetchEvents = async () => {
+      try {
+        console.log(`Fetching events from: ${API_URL}/public`); // ✅ Debugging log
+        const { data } = await axios.get(`${API_URL}/public`, { timeout: 5000 });
+    
+        // ✅ Ensure it's an array before returning
+        if (!Array.isArray(data)) {
+          console.error("⚠️ fetchEvents(): Expected an array but got:", data);
+          return [];
+        }
+        return data;
+      } catch (error) {
+        console.error("🚨 Error fetching events:", error);
+        return []; // ✅ Return empty array instead of undefined/null
+      }
+    };
+//this part modified above
+/*
+    // ✅ Fetch all events (public)
 export const fetchEvents = async () => {
   try {
-    const { data } = await axios.get(`${API_URL}/public`);
+    console.log(`Fetching events from: ${API_URL}/public`); // Debugging log
+    const { data } = await axios.get(`${API_URL}/public`, { timeout: 5000 });
     return data;
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error("🚨 Error fetching events:", error);
     throw error;
   }
 };
+*/
 
-// Create a new event (authenticated)
+// ✅ Create a new event (authenticated)
 export const createEvent = async (event: Event) => {
   try {
     const token = AuthService.getToken();
@@ -24,12 +49,12 @@ export const createEvent = async (event: Event) => {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (error) {
-    console.error('Error creating event:', error);
+    console.error("🚨 Error creating event:", error);
     throw error;
   }
 };
 
-// Delete an event (authenticated)
+// ✅ Delete an event (authenticated)
 export const deleteEvent = async (id: string) => {
   try {
     const token = AuthService.getToken();
@@ -38,20 +63,21 @@ export const deleteEvent = async (id: string) => {
     });
     return id;
   } catch (error) {
-    console.error('Error deleting event:', error);
+    console.error("🚨 Error deleting event:", error);
     throw error;
   }
 };
 
-// implement Updating events w/authenticated
-export const updateEvent = async (id: string | number, event: any) => {
+// ✅ Update an event (authenticated)
+export const updateEvent = async (id: string | number, event: Event) => {
   try {
     const token = AuthService.getToken();
-    await axios.put(`${API_URL}/${id}`, event, {
+    const { data } = await axios.put<Event>(`${API_URL}/${id}`, event, {
       headers: { Authorization: `Bearer ${token}` },
     });
+    return data;
   } catch (error) {
-    console.error('Error updating event:', error);
+    console.error("🚨 Error updating event:", error);
     throw error;
   }
 };
