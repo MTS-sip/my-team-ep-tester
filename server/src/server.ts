@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
-// import { sequelize } from "./config/connections.js";
+import { sequelize } from "./config/connections.js";
 import authRoutes from "./routes/auth.js";
 import eventRoutes from "./routes/events.js";
 import { fileURLToPath } from "url"; //  define `__dirname`
@@ -32,16 +32,16 @@ app.use("/api/events", eventRoutes);
 app.use(express.json());
 
 // Database connection
-// const connectDB = async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log("✅ Database connected successfully");
-//     await sequelize.sync();
-//   } catch (error) {
-//     console.error("❌ Database connection failed:", error);
-//   }
-// };
-// connectDB();
+const connectDB = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("✅ Database connected successfully");
+    await sequelize.sync();
+  } catch (error) {
+    console.error("❌ Database connection failed:", error);
+   }
+ };
+connectDB();
 
 // Root endpoint
 app.get("*", (_, res) => {  // *asteraisk for all, rcompare slash /
