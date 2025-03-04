@@ -1,8 +1,8 @@
 import axios from 'axios';
-import AuthService from '../utils/auth.ts';
-import type { Event } from '../interfaces/event.tsx';
+import * as AuthService from '../utils/auth.js';
+import type { Event } from '../interfaces/event.js';
 //import Login from '../pages/Login.tsx';
-import type { UserLogin } from '../interfaces/userLogin.tsx';
+import type { UserLogin } from '../interfaces/UserLogin.js';
 
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/events';
@@ -82,7 +82,9 @@ export const login = async (userInfo: UserLogin) => {
     return Promise.reject('Could not fetch user info');
   }
 };
-//export default Login;
+
+
+ // export default Login;
 
 /* 
 import type { UserLogin } from '../interfaces/userLogin.tsx';

@@ -1,3 +1,5 @@
+// MOT USIN RSVP for initial build
+/*
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -57,3 +59,5 @@ const RSVP = () => {
 };
 
 export default RSVP;
+
+*/

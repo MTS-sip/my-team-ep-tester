@@ -1,7 +1,7 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
-import Auth from '../utils/auth';
+import * as Auth from '../utils/auth'; // Ensure correct import
 import { login } from '../api/authAPI';
-import type { UserLogin } from '../interfaces/userLogin';
+import type { UserLogin } from '../interfaces/UserLogin';
 
 const Login = () => {
   const [loginData, setLoginData] = useState<UserLogin>({
@@ -9,12 +9,10 @@ const Login = () => {
     password: '',
   });
 
-  const [loading, setLoading] = useState(false); // loading state
-  const [error, setError] = useState<string | null>(null); 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setLoginData({
       ...loginData,
@@ -24,22 +22,22 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true); //Show loading state
-    setError(null); 
+    setLoading(true);
+    setError(null);
 
     try {
-      const data = await login(loginData); // API call
+      const data = await login(loginData);
 
-      if (data && data.token) { 
-        Auth.login(data.token); //Store token
+      if (data && data.token) {
+        Auth.storeToken(data.token); // ✅ FIXED: Use correct function
       } else {
-        throw new Error('No token received from server'); 
+        throw new Error('No token received from server');
       }
     } catch (err) {
       console.error('🚨 Login failed:', err);
-      setError('Invalid username or password. Please try again.'); // User error message
+      setError('Invalid username or password. Please try again.');
     } finally {
-      setLoading(false); //Hide loading state
+      setLoading(false);
     }
   };
 
@@ -48,7 +46,7 @@ const Login = () => {
       <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
 
-        {error && <p className="error-message">{error}</p>} {/* Show error if occuring */}
+        {error && <p className="error-message">{error}</p>}
 
         <div className='form-group'>
           <label>Username</label>
@@ -78,7 +76,7 @@ const Login = () => {
 
         <div className='form-group'>
           <button className='btn btn-primary' type='submit' disabled={loading}>
-            {loading ? "Logging in..." : "Login"} {/* indiacte loading text */}
+            {loading ? "Logging in..." : "Login"}
           </button>
         </div>
       </form>
