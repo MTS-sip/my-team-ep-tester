@@ -5,11 +5,9 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "allowJs": true,
-    "noImplicitAny": false,
-    "outDir": "dist",             
+    "noImplicitAny": false,            
     "rootDir": "src",             
     "noEmitOnError": true        
-  },
-  "include": ["src"],
-      
+  },   
+  "include": ["src"],  
 }
