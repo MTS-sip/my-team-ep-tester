@@ -32,7 +32,7 @@ app.use(express.json());
 
 // ✅ API Routes
 import authRoutes from "./routes/auth.js";
-import eventRoutes from "./routes/events.js";
+import eventRoutes from "./routes/event.js";
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 
