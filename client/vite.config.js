@@ -10,7 +10,6 @@ export default defineConfig({
       input: {
         main: "index.html",
       },
-      external: ["jwt-decode"], // Moved outside of `input`
     },
   },
   server: {
