@@ -12,10 +12,10 @@ const API_URL =
 
     export const fetchEvents = async () => {
       try {
-        console.log(`Fetching events from: ${API_URL}/public`); // ✅ Debugging log
+        console.log(`Fetching events from: ${API_URL}/public`); // Debugging log
         const { data } = await axios.get(`${API_URL}/public`, { timeout: 5000 });
     
-        // ✅ Ensure it's an array before returning
+        // Ensure it's an array before returning
         if (!Array.isArray(data)) {
           console.error("⚠️ fetchEvents(): Expected an array but got:", data);
           return [];
@@ -23,25 +23,12 @@ const API_URL =
         return data;
       } catch (error) {
         console.error("🚨 Error fetching events:", error);
-        return []; // ✅ Return empty array instead of undefined/null
+        return []; //  Return empty array instead of undefined/null
       }
     };
-//this part modified above
-/*
-    // ✅ Fetch all events (public)
-export const fetchEvents = async () => {
-  try {
-    console.log(`Fetching events from: ${API_URL}/public`); // Debugging log
-    const { data } = await axios.get(`${API_URL}/public`, { timeout: 5000 });
-    return data;
-  } catch (error) {
-    console.error("🚨 Error fetching events:", error);
-    throw error;
-  }
-};
-*/
 
-// ✅ Create a new event (authenticated)
+
+// Create a new event (authenticated)
 export const createEvent = async (event: Event) => {
   try {
     const token = AuthService.getToken();
@@ -54,7 +41,7 @@ export const createEvent = async (event: Event) => {
   }
 };
 
-// ✅ Delete an event (authenticated)
+// Delete an event (authenticated)
 export const deleteEvent = async (id: string) => {
   try {
     const token = AuthService.getToken();
@@ -68,7 +55,7 @@ export const deleteEvent = async (id: string) => {
   }
 };
 
-// ✅ Update an event (authenticated)
+// Update an event (authenticated)
 export const updateEvent = async (id: string | number, event: Event) => {
   try {
     const token = AuthService.getToken();
