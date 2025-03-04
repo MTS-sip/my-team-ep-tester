@@ -1,4 +1,4 @@
-import { sequelize } from '../config/connections.js'; // Import sequelize as a named export
+import sequelize  from '../config/connections.js'; // Import sequelize as a named export
 import { seedUsers } from './user-seeds.js'; // Import user seeding function
 
 const seedAll = async (): Promise<void> => {

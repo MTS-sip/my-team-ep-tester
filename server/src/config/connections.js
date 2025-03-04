@@ -134,3 +134,4 @@ const sequelize = process.env.DB_URL
 // Export both configurations and Sequelize instance
 export { databaseConfig, sequelize };
 
+*/
