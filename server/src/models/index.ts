@@ -1,6 +1,6 @@
 import sequelize from './database.js'; // Import Sequelize Instance
 import { UserFactory } from './user.js';
-import Event from './Event.js';
+import Event from './event.js';
 
 // Initialize User Model with Sequelize Instance
 const User = UserFactory(sequelize);

@@ -29,7 +29,7 @@ const Login = () => {
       const data = await login(loginData);
 
       if (data && data.token) {
-        Auth.storeToken(data.token); // ✅ FIXED: Use correct function
+        Auth.storeToken(data.token); // Store token in local storage
       } else {
         throw new Error('No token received from server');
       }

@@ -29,38 +29,3 @@ const syncDatabase = async () => {
 };
 
 module.exports = { sequelize, User, Event, Rsvp, syncDatabase };
-
-/* 
-import dotenv from "dotenv";
-dotenv.config({ path: "../.env" }); // If inside the 'server' folder
-
-console.log(process.env.SECRET_KEY);
-
-import sequelize from "../config/database"; // Import the Sequelize instance
-import UserLogin from "./UserLogin";
-import User from "./User"; // Import User model
-import Event from "./Event"; // Import Event model
-import Rsvp from "./Rsvp"; // Import Rsvp model
-
-// Define Associations
-User.hasMany(Event, { foreignKey: "created_by", onDelete: "CASCADE" });
-Event.belongsTo(User, { foreignKey: "created_by", onDelete: "CASCADE" });
-
-User.hasMany(Rsvp, { foreignKey: "user_id", onDelete: "CASCADE" });
-Event.hasMany(Rsvp, { foreignKey: "event_id", onDelete: "CASCADE" });
-
-Rsvp.belongsTo(User, { foreignKey: "user_id", onDelete: "CASCADE" });
-Rsvp.belongsTo(Event, { foreignKey: "event_id", onDelete: "CASCADE" });
-
-// Sync models with the database (optional but useful)
-const syncDatabase = async () => {
-  try {
-    await sequelize.sync({ alter: true }); // Ensure tables are updated without losing data
-    console.log("Database synchronized successfully.");
-  } catch (error) {
-    console.error("Error syncing database:", error);
-  }
-};
-export { sequelize, User, Event, Rsvp, syncDatabase };
-module.exports = { sequelize, User, Event, Rsvp, syncDatabase };
-*/

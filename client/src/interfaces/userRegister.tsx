@@ -6,4 +6,4 @@ export interface userRegister {
   confirmPassword: string;
 }
 
-// typescriopt interface to register user, gracefull handlingling of null values
+// typescriopt interface to register user, gracefull handling of null values
