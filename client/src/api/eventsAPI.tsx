@@ -1,6 +1,6 @@
 import axios from "axios";
-import AuthService from "../utils/auth.ts";
-import type { Event } from "../interfaces/event.tsx";
+import * as AuthService from "../utils/auth.js";
+import type { Event } from "../interfaces/event.js";
 
 //  Ensure correct API URL (Render for production, localhost for development)
 const API_URL =

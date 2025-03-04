@@ -1,46 +1,52 @@
-// import { jwtDecode.jwtDecode } from 'jwt-decode';
-//import * as jwtdecode from 'jwt-decode';
-import type { UserLogin } from '../interfaces/userLogin.tsx';
+import { jwtDecode } from 'jwt-decode';
 
+// Define the JWT payload type
 interface JwtPayload {
-  exp?: number; // Define expiration time property
+  exp?: number;
+  id?: string;
+  email?: string;
 }
 
-class AuthService {
-  getProfile() {
-  // return jwtDecode<UserLogin>(this.getToken());
-  return null;
+// Function to decode a JWT token
+export const decodeToken = (token: string): JwtPayload | null => {
+  try {
+    return jwtDecode<JwtPayload>(token); // ✅ Ensure correct typing
+  } catch (error) {
+    console.error("Invalid JWT token:", error);
+    return null;
   }
+};
 
-  loggedIn() {
-   //const token = this.getToken();
-  //return !!token && !this.isTokenExpired(token);
-  return null;
-  }
+// Function to check if a JWT token is expired
+export const isTokenExpired = (token: string): boolean => {
+  const decoded = decodeToken(token);
+  if (!decoded || !decoded.exp) return true; // Assume expired if no expiration field
+  return decoded.exp * 1000 < Date.now(); // Convert exp from seconds to milliseconds
+};
 
-  isTokenExpired(token: string) {
-    try {
-      //const decoded: JwtPayload = jwtDecode(token);
-      //return decoded?.exp && decoded.exp < Date.now() / 1000;
-      return null;
-    } catch (err) {
-      return false;
-    }
-  }
+// Function to store token in localStorage
+export const storeToken = (token: string): void => {
+  localStorage.setItem('authToken', token);
+};
 
-  getToken(): string {
-    return localStorage.getItem('id_token') || '';
-  }
+// Function to retrieve token from localStorage
+export const getToken = (): string | null => {
+  return localStorage.getItem('authToken');
+};
 
-  login(idToken: string) {
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
-  }
+// Function to remove token (logout)
+export const removeToken = (): void => {
+  localStorage.removeItem('authToken');
+};
 
-  logout() {
-    localStorage.removeItem('id_token');
-    window.location.assign('/');
-  }
-}
+// Function to check if a user is authenticated
+export const isAuthenticated = (): boolean => {
+  const token = getToken();
+  return token !== null && !isTokenExpired(token);
+};
 
-export default new AuthService();
+// Function to get the current logged-in user
+export const getCurrentUser = (): JwtPayload | null => {
+  const token = getToken();
+  return token ? decodeToken(token) : null;
+};

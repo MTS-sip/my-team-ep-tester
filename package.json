@@ -2,19 +2,22 @@
   "name": "event-planner",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run server:dev\" \"wait-on http://localhost:3000 && npm run client:dev\"",
+    "dev": "npx nodemon --exec npx ts-node src/server.ts",
     "build": "cd client && npm run build",
-    "start": "npm run server && npm install && npm run client",
+    "start": "npm run build && node dist/server.js",
     "install": "cd server && npm install && cd ../client && npm install",
     "server": "cd server && npm start",
-    "server:dev": "cd server && server",
+    "server:dev": "cd server && npm run dev",
     "client": "cd client && npm start",
     "client:dev": "cd client && npm run dev",
-    "seed": "cd server && npm run seed"
+    "seed": "npm run build && node dist/seeds/index.js"
   },
+
+
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "concurrently": "^8.2.2",
+    "nodemon": "^3.1.9",
     "wait-on": "^7.2.0"
   },
   "dependencies": {
