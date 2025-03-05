@@ -1,6 +1,6 @@
 // Defines the User model for database storage
 import { DataTypes } from 'sequelize';
-import sequelize from './database.js';
+import sequelize from '../config/connections.js';
 
 export function UserFactory(sequelize) {
   return sequelize.define('User', {

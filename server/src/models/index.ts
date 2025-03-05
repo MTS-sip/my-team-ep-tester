@@ -1,4 +1,4 @@
-import sequelize from './database.js'; // Import Sequelize Instance
+import sequelize from '../config/connections.js'; // Import Sequelize Instance
 import { UserFactory } from './user.js';
 import Event from './event.js';
 
