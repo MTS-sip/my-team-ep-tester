@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npx nodemon --exec npx ts-node src/server.ts",
     "build": "cd client && npm run build",
-    "start": "cd server && npm run build && cd ../ && node server/dist/server.js",
+    "start": "cd server && npm run build && node dist/server.js",
     "install": "cd server && npm install && cd ../client && npm install",
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",

@@ -1,6 +1,6 @@
-import  sequelize  from "../models/database"; 
+import  sequelize  from "../config/connections"; 
 import bcrypt from "bcrypt"; // 
-import User from "../models/User"; 
+import {User} from "../models/index.js"; 
 
 export const seedUsers = async () => {
   try {
@@ -8,9 +8,9 @@ export const seedUsers = async () => {
     console.log("Database connected ✅");
 
     const users = [
-      { username: "johndoe", password: "password1" },
-      { username: "janesmith", password: "password2" },
-      { username: "michaelscipio", password: "password3" },
+      { email: 'user1@example.com', username: "johndoe", password: "password1" }, 
+      { email: 'user2@example.com', username: "janesmith", password: "password2" },
+      { email: 'scipiomichael@icloud.com', username: "michaelscipio", password: "password3" },
     ];
 
     // Hash passwords
