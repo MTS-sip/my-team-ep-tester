@@ -1,6 +1,6 @@
 // Defines the Event model for database storage
 import { DataTypes } from 'sequelize';
-import sequelize from './database.js';
+import sequelize from '../config/connections.js';
 
 const Event = sequelize.define('Event', {
   id: {
