@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import authRoutes from "./routes/auth.js";
+import eventRoutes from "./routes/event.js";
 
 dotenv.config();
 
@@ -31,8 +33,7 @@ app.use(express.static(clientBuildPath));
 app.use(express.json());
 
 // API Routes
-import authRoutes from "./routes/auth.js";
-import eventRoutes from "./routes/event.js";
+
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 
