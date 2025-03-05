@@ -1,4 +1,4 @@
-import  sequelize  from "../config/connections"; 
+import  sequelize  from "../config/connections.js"; 
 import bcrypt from "bcrypt"; // 
 import {User} from "../models/index.js"; 
 
