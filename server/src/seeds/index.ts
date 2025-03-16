@@ -1,17 +1,21 @@
-import sequelize  from '../config/connections.js'; // Import sequelize as a named export
-import { seedUsers } from './user-seeds.js'; // Import user seeding function
+import sequelize from '../config/connections.js';
+import { seedUsers } from './user-seeds.js';
+import { seedEvents } from './event-seeds.js';
 
-const seedAll = async (): Promise<void> => {
+const seedAll = async () => {
   try {
-    await sequelize.sync({ force: true }); // Force sync drops tables and recreates them
-    console.log('\n----- DATABASE SYNCED -----\n');
+    await sequelize.sync({ force: true });
+    console.log("\n✅ DATABASE SYNCED ✅\n");
 
-    await seedUsers(); // Call user seed function
-    console.log('\n----- USERS SEEDED -----\n');
+    await seedUsers();
+    console.log("\n✅ USERS SEEDED ✅\n");
+
+    await seedEvents();
+    console.log("\n✅ EVENTS SEEDED ✅\n");
 
     process.exit(0);
   } catch (error) {
-    console.error('Error seeding database:', error);
+    console.error("❌ Error seeding database:", error);
     process.exit(1);
   }
 };

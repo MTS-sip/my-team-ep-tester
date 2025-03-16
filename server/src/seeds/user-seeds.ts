@@ -1,4 +1,4 @@
-//import  sequelize  from "../config/connections.js"; 
+// import  sequelize  from "../config/connections.js"; 
 import bcrypt from "bcrypt"; // 
 import {User} from "../models/index.js"; 
 
@@ -21,18 +21,7 @@ export const seedUsers = async () => {
 
 
 
-/*
-export const seedUsers = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("Database connected ✅");
 
-    const users = [
-      { email: 'user1@example.com', username: "degraz", password: "password1", name: "User One" }, 
-      { email: 'user2@example.com', username: "benben", password: "password2", name: "User Two" },
-      { email: 'scipiomichael@icloud.com', username: "michael", password: "password3", name: "Michael Scipio" },
-    ];
-    */
 
 
 
