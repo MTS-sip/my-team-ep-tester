@@ -27,6 +27,7 @@ export const isTokenExpired = (token: string): boolean => {
 // Function to store token in localStorage
 export const storeToken = (token: string): void => {
   localStorage.setItem('authToken', token);
+  window.location.assign('/create-event'); // Redirect to home page after storing token
 };
 
 // Function to retrieve token from localStorage

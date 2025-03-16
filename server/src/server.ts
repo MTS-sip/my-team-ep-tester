@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import authRoutes from "./routes/auth.js";
 import eventRoutes from "./routes/event.js";
-
+import { syncDatabase } from "./models/index.js";
 dotenv.config();
 
 const app = express();
@@ -41,6 +41,7 @@ app.use("/api/events", eventRoutes);
 app.get("*", (_, res) => {
   res.sendFile(path.join(clientBuildPath, "index.html"));
 });
+await syncDatabase(); // Sync database
 
 // Start Server
 app.listen(PORT, () => {
