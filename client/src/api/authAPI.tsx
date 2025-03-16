@@ -11,7 +11,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/event
 // Fetch all events
 export const fetchEvents = async () => {
   try {
-    const { data } = await axios.get(`${API_URL}/public`);
+    const { data } = await axios.get(`${API_URL}/public`); // should this be VITE_API_URL?
     return data;
   } catch (error) {
     console.error('Error fetching events:', error);

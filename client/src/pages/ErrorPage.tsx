@@ -1,4 +1,3 @@
-
 const ErrorPage = () => {
   return (
     <section>
