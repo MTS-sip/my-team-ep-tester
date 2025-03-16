@@ -1,7 +1,8 @@
-export interface userRegister {
+export interface UserRegister {
+  id: string
   name: string | null;
-  email: string;
   username: string;
+  email: string;
   password: string;
   confirmPassword: string;
 }

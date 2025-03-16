@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from "sequelize";
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
 export const up = async (queryInterface) => {
@@ -14,6 +14,15 @@ export const up = async (queryInterface) => {
     },
     description: {
       type: DataTypes.TEXT,
+    },
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     createdBy: {
       type: DataTypes.UUID,
