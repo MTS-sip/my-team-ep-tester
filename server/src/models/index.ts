@@ -1,10 +1,9 @@
 import sequelize from '../config/connections.js'; // Import Sequelize Instance
 import { UserFactory } from './user.js';
-import { UserFactory }  from './event.js';
+import Event from './event.js';
 
 // Initialize User Model with Sequelize Instance
 const User = UserFactory(sequelize);
-const Event = UserFactory(sequelize);
 
 const syncDatabase = async () => {
   try {
