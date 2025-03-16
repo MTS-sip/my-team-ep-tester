@@ -29,7 +29,7 @@ Event.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "user",
+        model: "Users",
         key: "id",
       },
     },
@@ -44,8 +44,6 @@ Event.init(
   },
   {
     sequelize, //  import
-    modelName: "Event",
-    tableName: "event",
     timestamps: true,
   }
 );

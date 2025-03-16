@@ -12,8 +12,7 @@ const API_URL =
 
     export const fetchEvents = async () => {
       try {
-        console.log(`Fetching events from: ${API_URL}/public`); // Debugging log
-        const { data } = await axios.get(`${API_URL}/public`, { timeout: 5000 });
+        const { data } = await axios.get(`/api/events/public`, { timeout: 5000 });
     
         // Ensure it's an array before returning
         if (!Array.isArray(data)) {

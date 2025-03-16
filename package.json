@@ -10,7 +10,7 @@
     "server:dev": "cd server && npm run dev",
     "client": "cd client && npm start",
     "client:dev": "cd client && npm run dev",
-    "seed": "npm run build && cd server && node dist/seeds/index.js"
+    "seed": "cd server && npm run build && node dist/seeds/index.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

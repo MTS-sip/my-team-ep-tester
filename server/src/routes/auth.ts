@@ -8,6 +8,12 @@ dotenv.config();
 
 const router = express.Router();
 
+router.post("/login", async (req, res) => {
+  // @ts-ignore
+  const { username, password } = req.body;
+  res.send("login route");
+});
+
 router.post("/register", async (req, res) => {
   try {
     const { name, username, email, password } = req.body;

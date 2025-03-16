@@ -15,7 +15,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://my-team-ep-tester.onrender.com",
+        target: "http://localhost:7070", // Replace with your backend server URL
         changeOrigin: true,
         secure: false,
       },

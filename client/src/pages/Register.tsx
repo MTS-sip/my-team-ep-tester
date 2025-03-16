@@ -8,6 +8,7 @@ const Register = () => {
     id: '',
     name: '',
     username: '',
+    email: '',
     password: '',
     confirmPassword: '',
   });
@@ -33,6 +34,7 @@ const Register = () => {
 
     try {
       await signUp({
+        id: registerData.id,
         name: registerData.name,
         username: registerData.username,
         password: registerData.password,
