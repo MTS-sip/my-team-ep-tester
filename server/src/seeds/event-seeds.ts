@@ -13,11 +13,15 @@ export const seedEvents = async (): Promise<void> => {
       {
         title: "Tech Conference 2024",
         description: "A gathering of tech enthusiasts.",
+        location: "San Francisco, CA",
+        date: "2024-05-01",
         createdBy: user.id,
       },
       {
         title: "Startup Pitch Night",
         description: "Entrepreneurs pitch their ideas.",
+        location: "New York, NY",
+        date: "2024-06-01",
         createdBy: user.id,
       },
     ]);

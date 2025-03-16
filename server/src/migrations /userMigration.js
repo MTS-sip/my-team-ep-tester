@@ -1,18 +1,21 @@
-// Migration script to create Users table
+// migrations/<timestamp>-create-users.js
+
 import { DataTypes } from "sequelize";
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
-export const up = async (queryInterface) => {
+/** @param {import('sequelize')} Sequelize */
+export const up = async (queryInterface, Sequelize) => {
   await queryInterface.createTable("Users", {
     id: {
-      type: DataTypes.UUID, //  from Sequelize.UUID
-      defaultValue: DataTypes.UUIDV4, // from Sequelize
-      primaryKey: true, // Unique identifier for each user
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true, // Ensures email is unique
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -20,16 +23,20 @@ export const up = async (queryInterface) => {
     },
     createdAt: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW, // Ensures createdAt is set automatically
+      allowNull: false,
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
     },
     updatedAt: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW, // Ensures updatedAt is set automatically
+      allowNull: false,
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      onUpdate: Sequelize.literal("CURRENT_TIMESTAMP"),
     },
   });
 };
 
 /** @param {import('sequelize').QueryInterface} queryInterface */
-export const down = async (queryInterface) => {
-  await queryInterface.dropTable("Users"); // Drops Users table if rollback is needed
+/** @param {import('sequelize')} _Sequelize */
+export const down = async (queryInterface, _Sequelize) => {
+  await queryInterface.dropTable("Users");
 };
