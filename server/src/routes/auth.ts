@@ -13,15 +13,15 @@ const router = express.Router();
  */
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body; // Using email instead of username for consistency
+    const { username, password } = req.body; // Using email instead of username for consistency
 
-    if (!email || !password) {
+    if (!username|| !password) {
       return res.status(400).json({ message: "Email and password required" });
     }
 
     // Find user by email (Ensure email is unique)
-    const user = await User.findOne({ where: { email } });
-
+    const user = await User.findOne({ where: { username } });
+console.log(user);
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
 
     // Generate JWT Token
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: user.id, userename: user.username},
       process.env.JWT_SECRET || "your_secret_key",
       { expiresIn: "1h" } // Token expires in 1 hour
     );
