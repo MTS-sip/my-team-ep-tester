@@ -4,7 +4,7 @@ import { createEvent } from "../api/eventsAPI.js"; // Import the API function
 
 const Create = () => {
   const [event, setEvent] = useState({
-    id: 0,
+    id: "",
     title: "",
     description: "",
     date: "",

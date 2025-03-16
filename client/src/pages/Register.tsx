@@ -5,6 +5,7 @@ import type { User } from '../interfaces/User';
 
 const Register = () => {
   const [registerData, setRegisterData] = useState<User>({
+    id: '',
     name: '',
     username: '',
     password: '',

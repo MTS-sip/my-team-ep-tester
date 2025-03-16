@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import  sequelize  from "../config/connections.js"; // ✅ Fix: Use named import
+import  sequelize  from "../config/connections.js"; // Use named import
 
 class Event extends Model {
   public id!: string;
@@ -8,6 +8,7 @@ class Event extends Model {
   public createdBy!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
+  public location!: string;
 }
 
 Event.init(
@@ -28,7 +29,7 @@ Event.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Users",
+        model: "user",
         key: "id",
       },
     },
@@ -42,9 +43,9 @@ Event.init(
     },
   },
   {
-    sequelize, // ✅ Fixed import
+    sequelize, //  import
     modelName: "Event",
-    tableName: "Events",
+    tableName: "event",
     timestamps: true,
   }
 );
